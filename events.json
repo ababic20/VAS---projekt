@@ -1,0 +1,72 @@
+[
+    {
+        "performer": "Drake",
+        "ticket_price": 127,
+        "location": "Split",
+        "event_date": "2025-04-23 15:22:41",
+        "description": "**Option 1 (Short & Sweet):**\n\n> Get ready to experience the 6 God himself!  Drake brings his electrifying energy and chart-topping hits to [Venue Name] on [Date].  Don't miss out!\n\n**Option 2 (More Descriptive):**\n\n> From \"Hotline Bling\" to his latest hits, Drake's iconic sound will fill [Venue Name] on [Date]. Witness the masterful performance and undeniable charisma of one of music's biggest stars. Secure your tickets now!\n\n**Option 3 (Emphasis on Experience):**\n\n> Prepare for an unforgettable night as Drake takes the stage at [Venue Name] on [Date].  This is more than a concert; it's a cultural phenomenon.  Experience the music, the energy, the moment. Tickets are selling fast!"
+    },
+    {
+        "performer": "Harry Styles",
+        "ticket_price": 117,
+        "location": "Osijek",
+        "event_date": "2025-04-24 15:22:42",
+        "description": "Harry Styles:  A global superstar and critically acclaimed artist, Harry Styles brings his electrifying stage presence and chart-topping hits to [Venue Name]!  Experience an unforgettable night of music and showmanship as he performs songs from his celebrated albums.  Don't miss this highly anticipated event."
+    },
+    {
+        "performer": "Lizzo",
+        "ticket_price": 145,
+        "location": "Zagreb",
+        "event_date": "2025-04-02 15:22:43",
+        "description": "Get ready to feel good!  Lizzo, the Grammy-winning global superstar, brings her electrifying energy and undeniable charisma to the stage.  Expect infectious hits, powerhouse vocals, and a celebration of body positivity and self-love that will leave you breathless.  This is more than a concert; it's a party!"
+    },
+    {
+        "performer": "Olivia Rodrigo",
+        "ticket_price": 144,
+        "location": "Split",
+        "event_date": "2025-03-04 15:22:44",
+        "description": "Olivia Rodrigo:  The Grammy-winning singer-songwriter behind chart-topping hits like \"drivers license\" and \"good 4 u\" brings her raw talent and emotionally resonant music to [Venue Name]!  Experience the electrifying energy of a generation's voice live in concert."
+    },
+    {
+        "performer": "Post Malone",
+        "ticket_price": 118,
+        "location": "Rijeka",
+        "event_date": "2025-01-19 15:22:45",
+        "description": "Get ready to witness the multi-platinum, genre-bending phenomenon that is Post Malone!  Prepare for a night of unforgettable hits, electrifying energy, and a truly unique musical experience.  From his chart-topping anthems to his raw, emotional ballads, Post Malone delivers a performance you won't soon forget. Don't miss out!"
+    },
+    {
+        "performer": "Dua Lipa",
+        "ticket_price": 140,
+        "location": "Osijek",
+        "event_date": "2025-04-14 15:22:46",
+        "description": "Get ready to feel the beat!  Global superstar Dua Lipa brings her electrifying energy and chart-topping hits to [Venue Name]!  Experience the unforgettable sounds of Future Nostalgia and more as she commands the stage with her iconic vocals and unstoppable charisma.  Don't miss this incredible night of music."
+    },
+    {
+        "performer": "Cardi B",
+        "ticket_price": 98,
+        "location": "Osijek",
+        "event_date": "2025-03-14 15:22:47",
+        "description": "Get ready to Bardi Gang!  Grammy-winning superstar Cardi B brings her explosive energy, chart-topping hits, and unmatched stage presence to [Venue Name]!  Prepare for a night of unforgettable music, iconic dance moves, and pure, unadulterated Cardi B magic.  This is a show you absolutely CANNOT miss."
+    },
+    {
+        "performer": "Billie Eilish",
+        "ticket_price": 104,
+        "location": "Osijek",
+        "event_date": "2024-12-19 15:22:48",
+        "description": "Seven-time Grammy Award winner Billie Eilish, a global phenomenon, brings her electrifying live show to [Venue Name]!  Experience the raw emotion and captivating soundscapes of one of the most influential artists of her generation.  Prepare for an unforgettable night of genre-bending music and breathtaking visuals. Don't miss out!"
+    },
+    {
+        "performer": "Ariana Grande",
+        "ticket_price": 97,
+        "location": "Rijeka",
+        "event_date": "2024-11-25 15:22:49",
+        "description": "Grammy-winning global superstar Ariana Grande brings her electrifying stage presence and powerhouse vocals to [Venue Name]!  Prepare for an unforgettable night of chart-topping hits and breathtaking performance art as Ariana delivers a show you won't soon forget."
+    },
+    {
+        "performer": "Ed Sheeran",
+        "ticket_price": 132,
+        "location": "Zagreb",
+        "event_date": "2025-04-11 15:22:49",
+        "description": "GRAMMY Award-winning singer-songwriter Ed Sheeran returns!  Prepare for an unforgettable night of intimate storytelling and chart-topping hits as Ed performs his greatest songs live.  Don't miss this incredible opportunity to experience the magic of Ed Sheeran."
+    }
+]
