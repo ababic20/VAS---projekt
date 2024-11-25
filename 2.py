@@ -1,4 +1,3 @@
-import random
 import asyncio
 from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
@@ -55,27 +54,30 @@ class EventRequestAgent(Agent):
             print(f"{Fore.MAGENTA}[KRAJ] {Style.BRIGHT}Svi zahtjevi su poslani.{Style.RESET_ALL}")
 
             ontology = str(input("Unesite naziv događaja na koji bi ste htijeli otići: ")).strip()
-
-            if ontology:
-                msg = Message(to="quoteagent@localhost")
-                msg.set_metadata("ontology", ontology)
-                msg.set_metadata("performative", "request")
-                await self.send(msg)
-                print(f"[ZAHTJEV] Poslan zahtjev na QuoteAgent za događaj '{ontology}'")
-                
-                response = await self.receive(timeout=10)
-                if response:
-                    if response.metadata["performative"] == "inform":
-                        leaflet_info = response.body
-                        print(f"{Fore.YELLOW}[INFO] {Style.BRIGHT}Primljen podatak za kreiranje leaflet-a: {leaflet_info}")
-                        
-                        leaflet_msg = Message(to="fridge@localhost")
-                        leaflet_msg.set_metadata("performative", "inform")
-                        leaflet_msg.body = f"{leaflet_info}"
-                        
-                        await self.send(leaflet_msg)
-                        print(f"{Fore.GREEN}[Poslano] {Style.BRIGHT}Poslani podaci '{leaflet_info}' Leaflet Agentu za HTML '{ontology}'")
-
+            while True:
+                if ontology:
+                    msg = Message(to="quoteagent@localhost")
+                    msg.set_metadata("ontology", ontology)
+                    msg.set_metadata("performative", "request")
+                    await self.send(msg)
+                    print(f"[ZAHTJEV] Poslan zahtjev na QuoteAgent za događaj '{ontology}'")
+                    
+                    response = await self.receive(timeout=10)
+                    if response:
+                        if response.metadata["performative"] == "inform":
+                            leaflet_info = response.body
+                            print(f"{Fore.YELLOW}[INFO] {Style.BRIGHT}Primljen podatak za kreiranje leaflet-a: {leaflet_info}")
+                            
+                            leaflet_msg = Message(to="fridge@localhost")
+                            leaflet_msg.set_metadata("performative", "inform")
+                            leaflet_msg.body = f"{leaflet_info}"
+                            
+                            await self.send(leaflet_msg)
+                            print(f"{Fore.GREEN}[Poslano] {Style.BRIGHT}Poslani podaci '{leaflet_info}' Leaflet Agentu za HTML '{ontology}'")
+                    jos = input("Želite li poslati zahtjev za još jedan događaj? (da/ne): ").strip().lower()
+                    if jos != "da":
+                        print("Završavam rad agenta.")
+                        break
             await self.agent.stop()
 
     async def setup(self):
