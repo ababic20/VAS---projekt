@@ -60,7 +60,7 @@ async def main():
     agent = EventAgent("quoteagent@localhost", "1234")
     await agent.start()
     print(f"{Fore.GREEN}[POKRENUT] {Style.BRIGHT}EventAgent je pokrenut i čeka poruke.{Style.RESET_ALL}")
-    await asyncio.Future()  # Drži agenta aktivnim
+    await asyncio.Future()  
 
 if __name__ == "__main__":
     asyncio.run(main())

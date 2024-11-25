@@ -68,7 +68,7 @@ class EventRequestAgent(Agent):
                 await asyncio.sleep(3)  
             
             print(f"{Fore.MAGENTA}[KRAJ] {Style.BRIGHT}Svi zahtjevi su poslani.{Style.RESET_ALL}")
-            ontology = str(input("Unesite naziv događaja: ")).strip()
+            ontology = str(input("Unesite naziv događaja na koji bi ste htijeli otići: ")).strip()
 
             if ontology:
                 msg = Message(to="quoteagent@localhost")
@@ -85,7 +85,7 @@ class EventRequestAgent(Agent):
                         
                         leaflet_msg = Message(to="fridge@localhost")
                         leaflet_msg.set_metadata("performative", "inform")
-                        leaflet_msg.body = f"Kreiraj leaflet za događaj: {ontology}\nInfo: {leaflet_info}"
+                        leaflet_msg.body = f"{leaflet_info}"
                         
                         await self.send(leaflet_msg)
                         print(f"{Fore.GREEN}[Poslano] {Style.BRIGHT}Poslani podaci '{leaflet_info}' Leaflet Agentu za HTML '{ontology}'")

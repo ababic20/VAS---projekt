@@ -4,7 +4,7 @@ import json
 from random import randint, choice
 from datetime import datetime, timedelta
 
-os.environ["API_KEY"] = "AIzaSyCW8MzMYv3xRXgC69JBAhRHBPvLPoeHvjk"
+os.environ["API_KEY"] = ""
 
 genai.configure(api_key=os.environ["API_KEY"])
 
