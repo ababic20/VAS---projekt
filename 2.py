@@ -25,22 +25,15 @@ class EventRequestAgent(Agent):
         except KeyError:
             print(f"{Fore.RED}[GREŠKA] {Style.BRIGHT}Pogrešan format 'events.json'! Nedostaje ključ 'performer'.{Style.RESET_ALL}")
             return []
-        
+
     class RequestSender(CyclicBehaviour):
         async def run(self):
             if not self.agent.performers:
                 print(f"{Fore.RED}[INFO] {Style.BRIGHT}Nema izvođača za slanje zahtjeva.{Style.RESET_ALL}")
                 await self.agent.stop()
                 return
-            
-            performers = self.agent.performers[:]
-            random.shuffle(performers) 
-            random_requests_sent = False  
-            
-            for performer in performers:  
-                if random_requests_sent: 
-                    break
-                
+
+            for performer in self.agent.performers:
                 msg = Message(to="quoteagent@localhost")  
                 msg.set_metadata("ontology", performer)  
                 msg.set_metadata("performative", "request")
@@ -51,23 +44,16 @@ class EventRequestAgent(Agent):
                 response = await self.receive(timeout=10)
                 if response:
                     if response.metadata["performative"] == "inform":
-                        odgovor = response.body.split("Date:")
-                        osnovni_dio = odgovor[0].strip()  
-                        datum_opis = odgovor[1].strip() if len(odgovor) > 1 else ""
-                        
-                        osnovni_dio = osnovni_dio.replace("Ticket price:", "\nTicket price:").strip()
-                        datum_opis = datum_opis.replace("Description:", "\nDescription:").strip()
-
-                        print(f"{Fore.BLUE}[ODGOVOR] {Style.BRIGHT}Primljen odgovor za događaj:\n"
-                              f"{Fore.YELLOW}{osnovni_dio}\nDate: {datum_opis}{Style.RESET_ALL}")
+                        print(f"{Fore.BLUE}[ODGOVOR] {Style.BRIGHT}Primljen odgovor za događaj:\n{Fore.YELLOW}{response.body}{Style.RESET_ALL}")
                     elif response.metadata["performative"] == "not-understood":
                         print(f"{Fore.RED}[GREŠKA] {Style.BRIGHT}Odgovor: {response.body}{Style.RESET_ALL}")
                 else:
                     print(f"{Fore.RED}[UPOZORENJE] {Style.BRIGHT}Nije primljen odgovor.{Style.RESET_ALL}")
 
-                await asyncio.sleep(3)  
-            
+                await asyncio.sleep(3)
+
             print(f"{Fore.MAGENTA}[KRAJ] {Style.BRIGHT}Svi zahtjevi su poslani.{Style.RESET_ALL}")
+
             ontology = str(input("Unesite naziv događaja na koji bi ste htijeli otići: ")).strip()
 
             if ontology:
@@ -90,9 +76,7 @@ class EventRequestAgent(Agent):
                         await self.send(leaflet_msg)
                         print(f"{Fore.GREEN}[Poslano] {Style.BRIGHT}Poslani podaci '{leaflet_info}' Leaflet Agentu za HTML '{ontology}'")
 
-                                        
-                random_requests_sent = True
-                await self.agent.stop()  
+            await self.agent.stop()
 
     async def setup(self):
         behaviour = self.RequestSender()

@@ -32,11 +32,13 @@ class EventAgent(Agent):
                     response = Message(to=str(msg.sender))
                     response.set_metadata("ontology", ontology)
                     response.set_metadata("performative", "inform")
-                    response.body = (f"Event: {event['performer']}\n"
-                                     f"Location: {event['location']}\n"
-                                     f"Ticket price: {event['ticket_price']}\n"
-                                     f"Date: {event['event_date']}\n"
-                                     f"Description: {event['description']}")
+                    response.body = json.dumps({
+                        "event": event["performer"],
+                        "location": event["location"],
+                        "ticket_price": event["ticket_price"],
+                        "date": event["event_date"],
+                        "description": event["description"]
+                    }, ensure_ascii=False, indent=2)
                     await self.send(response)  
                     print(f"{Fore.GREEN}[ODGOVOR POSLAN] {Style.BRIGHT}Događaj '{ontology}' pronađen i poslan: {Style.RESET_ALL}{event['performer']}")
                 
@@ -44,7 +46,10 @@ class EventAgent(Agent):
                     response = Message(to=str(msg.sender))
                     response.set_metadata("ontology", ontology)
                     response.set_metadata("performative", "not-understood")
-                    response.body = f"Nema informacija za događaj: {ontology}"
+                    response.body = json.dumps({
+                        "error": "Nema informacija za događaj",
+                        "ontology": ontology
+                    }, ensure_ascii=False, indent=2)
                     await self.send(response)  
                     print(f"{Fore.RED}[GREŠKA] {Style.BRIGHT}Nema informacija za događaj '{ontology}'.{Style.RESET_ALL}")
                 else:
