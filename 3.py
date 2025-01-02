@@ -1,4 +1,4 @@
-from spade.agent import Agent 
+from spade.agent import Agent  
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
 from colorama import Fore, Style, init
@@ -7,6 +7,7 @@ import tkinter as tk
 from tkinter import ttk
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from reportlab.lib.colors import HexColor
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -15,6 +16,7 @@ from email import encoders
 import json
 
 init(autoreset=True)
+
 def wrap_text(text, width, canvas_obj):
     """Funkcija za prelom teksta prema zadanoj širini."""
     words = text.split(' ')
@@ -37,33 +39,52 @@ def wrap_text(text, width, canvas_obj):
 def save_as_pdf(info):
     file_name = "leaflet_info.pdf"
     c = canvas.Canvas(file_name, pagesize=letter)
+    
+    width, height = letter  
+    
+    c.setFillColor(HexColor("#007bff"))
+    c.rect(0, height - 100, width, 100, stroke=0, fill=1)
 
-    c.setFont("Helvetica-Bold", 16)
-    c.drawString(100, 750, "Informacije o dogadaju")
+    text = "Promotivni letak"
+    c.setFillColor("white")
+    c.setFont("Helvetica-Bold", 20)
+    text_width = c.stringWidth(text, "Helvetica-Bold", 20)
+    x_position = (width - text_width) / 2
+    c.drawString(x_position, height - 60, text)
+
+    c.setFillColor(HexColor("#f4f4f9"))
+    c.rect(0, 0, width, 50, stroke=0, fill=1)
+    c.setFillColor("black")
+    c.setFont("Helvetica", 10)
+    c.drawString(50, 20, "Višeagentni sustavi - projekt - 2024/2025 - Aleksandar Babic")
 
     c.setFont("Helvetica", 12)
-    text_object = c.beginText(100, 730)
+    text_object = c.beginText(100, height - 150)
     text_object.setFont("Helvetica", 12)
-    text_object.setTextOrigin(100, 730)
-    text_object.setLeading(14)  
+    text_object.setTextOrigin(100, height - 150)
+    text_object.setLeading(14)
 
-    attributes = info.split("\n")  
-    max_width = 450  
-    
+    attributes = info.split("\n")
+    max_width = 450
+
     for attribute in attributes:
-        wrapped_text = wrap_text(attribute, max_width, c)  
+        wrapped_text = wrap_text(attribute, max_width, c)
         for line in wrapped_text:
-            text_object.textLine(line)  
+            text_object.textLine(line)
         text_object.textLine("")  
 
     c.drawText(text_object)
+
+    c.setFont("Helvetica-Oblique", 10)
+    c.drawString(width - 100, 40, "Stranica 1")
+
     c.save()
 
     return file_name
 
 def send_email(recipient_email, pdf_file):
-    sender_email = ""
-    sender_password = ""  
+    sender_email = "aleksandar.babic62@gmail.com"
+    sender_password = "ctwk zfxq xmti ensz"  
 
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -73,7 +94,7 @@ def send_email(recipient_email, pdf_file):
         message = MIMEMultipart()
         message['From'] = sender_email
         message['To'] = recipient_email
-        message['Subject'] = "Leaflet Informacije"
+        message['Subject'] = "Leaflet informacije"
 
         body = "U privitku se nalazi PDF s informacijama o događaju."
         message.attach(MIMEText(body, 'plain'))
@@ -105,13 +126,13 @@ def show_leaflet(info):
             print(f"{Fore.RED}[GREŠKA] Molimo unesite valjanu e-mail adresu.")
 
     root = tk.Tk()
-    root.title("Informacije o oogadaju")
+    root.title("Informacije o događaju")
     root.geometry("1200x1000")  
     root.config(bg="#f4f4f9")  
 
     title_frame = tk.Frame(root, bg="#007bff", pady=15)
     title_frame.pack(fill="x")
-    title_label = tk.Label(title_frame, text="Informacije o dogadaju", font=("Helvetica", 18, "bold"), fg="white", bg="#007bff")
+    title_label = tk.Label(title_frame, text="Informacije o događaju", font=("Helvetica", 18, "bold"), fg="white", bg="#007bff")
     title_label.pack()
 
     info_frame = tk.Frame(root, bg="white", bd=3, relief="solid", padx=10, pady=10, width=300)  
@@ -187,4 +208,4 @@ async def main():
     await asyncio.Future()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main())  

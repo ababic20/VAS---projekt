@@ -60,7 +60,7 @@ if genre not in performers_by_genre:
 else:
     performers_list = performers_by_genre[genre]
 
-    events = [generate_random_event(performers_list) for _ in range(10)]  # Generiraj 10 izvođača
+    events = [generate_random_event(performers_list) for _ in range(10)]  
 
     events_json = json.dumps(events, indent=4)
 
